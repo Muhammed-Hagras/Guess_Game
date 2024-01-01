@@ -44,10 +44,6 @@ let secretNumber = Number(Math.trunc(Math.random() * 20) + 1);
 console.log(secretNumber);
 let score = 20;
 let highscore = 0;
-// const guessInput = document.querySelector('.guess');
-// const guessInputVal = document.querySelector('.guess').value;
-// console.log(guessInput);
-// console.log(guessInputVal);
 
 const checkFunHandler = function () {
   const guessInputVal = Number(document.querySelector('.guess').value);
@@ -59,8 +55,15 @@ const checkFunHandler = function () {
     //When player wins
   } else if (guessInputVal === secretNumber) {
     document.querySelector('.message').textContent = 'Correct Number...! 🧑‍✈️';
+    document.querySelector('.number').textContent = secretNumber;
+    document.querySelector('body').style.backgroundColor = 'green';
+    document.querySelector('.number').style.width = '30rem';
 
-    document.querySelector('.body').style.backgroundColor = 'green';
+    if (score > highscore) {
+      highscore = score;
+      document.querySelector('.highscore').textContent = highscore;
+    }
+
     //When the input is too high
   } else if (guessInputVal > secretNumber) {
     if (score > 1) {
@@ -87,7 +90,15 @@ const checkFunHandler = function () {
 
 checckBtn.addEventListener('click', checkFunHandler);
 
-// const myRandom = Math.trunc(Math.random() * 11) + 10;
-// console.log(myRandom);
+const checkAgainHandler = function () {
+  score = 20;
+  secretNumber = Number(Math.trunc(Math.random() * 20) + 1);
 
-// console.log(guessInput);
+  document.querySelector('.number').textContent = '?';
+  document.querySelector('.score').textContent = score;
+  document.querySelector('.guess').value = '';
+  document.querySelector('.message').textContent = 'Start guessing...';
+  document.querySelector('body').style.backgroundColor = '#222';
+};
+
+document.querySelector('.again').addEventListener('click', checkAgainHandler);
